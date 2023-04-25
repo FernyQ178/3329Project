@@ -55,10 +55,20 @@
 		color: #000000;
 	}
 </style>
+
+<title>Audio</title>
+
 </head>
 <body>
-	<h1>Dietary Restrictions Form</h1>
-	<p>Please check any dietary restrictions that apply:</p>
+
+	<audio controls autoplay hidden>
+		<source src="static/spinning3.wav" type="audio/wav">        
+	</audio>
+
+	</div>
+	
+	<h1>Let's Personalize Your Meal Plan!</h1>
+	<p>We want to make sure your meal plan is tailored to your needs. <br>Please check any box from which we can refrain from:</p>
 	<form action="/meal" method="POST">
 		<label for="gluten-free">
 			<input type="checkbox" id="gluten-free" name="gluten-free"> Gluten-free

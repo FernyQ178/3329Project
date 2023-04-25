@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for
 import random
+import time
 
 app = Flask(__name__)
 
@@ -25,11 +26,19 @@ def form():
 
 @app.route('/meal', methods=['GET', 'POST'])
 def meal():
+    time.sleep(3)
     if request.method == 'POST':
         restrictions = request.form.getlist('restrictions')
         meal = generate_meal(restrictions)
         return render_template('meal.html', meal=meal['name'], video_url=meal['video_url'])
     
+
+@app.route('/new_meal', methods=['GET', 'POST'])
+def new_meal():
+    if request.method == 'POST':
+        restrictions = request.form.getlist('restrictions')
+        meal = generate_meal(restrictions)
+        return render_template('meal.html', meal=meal['name'], video_url=meal['video_url'])
 
 def generate_meal(restrictions):
     meals = [
@@ -47,7 +56,7 @@ def generate_meal(restrictions):
         {'name': 'Shirataki Noodles with Tofu & Veggies', 'restrictions': ['nut-free', 'vegetarian'], 'video_url': 'https://www.youtube.com/embed/qkv_CxkdWB4'},
         {'name': 'The Ultimate Vegetarian Club Sandwhich', 'restrictions': ['vegetarian', 'nut-free'], 'video_url': 'https://www.youtube.com/embed/j5gg365Ewaw'},
         {'name': 'Crispy Smashed Potatoes', 'restrictions': ['vegetarian', 'nut-free', 'gluten-free'], 'video_url': 'https://www.youtube.com/embed/Ai_kivZXN9o'},
-        {'name': 'Creamy Sun-Dried Tomato and Spinach Pasta', 'restrictions': ['nut-free', 'vegetarian'], 'video_url': 'https://www.youtube.com/embed/ll-FAFOVNVk'},#
+        {'name': 'Creamy Sun-Dried Tomato and Spinach Pasta', 'restrictions': ['nut-free', 'vegetarian'], 'video_url': 'https://www.youtube.com/embed/ll-FAFOVNVk'},
         {'name': 'Spinach & Artichoke Dip Pasta', 'restrictions': ['nut-free', 'vegetarian'], 'video_url': 'https://www.youtube.com/embed/MS1eAjcp2HU?start=10'}
     ]
 
